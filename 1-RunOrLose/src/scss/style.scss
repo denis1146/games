@@ -1,0 +1,400 @@
+@import 'reset';
+
+$button-start-width: 210px;
+$button-start-height: 70px;
+$button-start-item-size: 12px;
+$game-item-width: 30px;
+$game-item-height: 60px;
+
+@mixin game-item-animation($duration, $timing-function, $delay: 0s){
+  animation: game-item-kf $duration $timing-function infinite normal running $delay;
+}
+@keyframes game-item-kf{
+  0%{
+    bottom: 0%;
+  }
+  100%{
+    bottom: 110%;
+  }
+}
+
+.wrapper{
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #333;
+  // overflow: hidden;
+}
+
+.start-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  margin: 0px 5px;
+
+  &__title{
+    font-size: 28px;
+    text-transform: uppercase;
+    padding: 0px 0px 55px 0px;
+    display: flex;
+  }
+  &__title span{
+    display: inline-block;
+    padding: 0px 10px 0px 0px;
+  }
+  &_title span:last-child{
+    padding: 0px;
+  }
+  &__title span:nth-child(1){
+    color: red;
+  }
+  &__title span:nth-child(2){
+    color: cyan;
+  }
+  &__title span:nth-child(3){
+    color: yellow;
+  }
+  &__title span:nth-child(4){
+    flex: 0 0 20px;
+  }
+  &__title span:nth-child(5){
+    color: lawngreen;
+  }
+  &__title span:nth-child(6){
+    color: magenta;
+  }
+  &__title span:nth-child(7){
+    flex: 0 0 20px;
+  }
+  &__title span:nth-child(8){
+    color: blue;
+  }
+  &__title span:nth-child(9){
+    color: mediumvioletred;
+  }
+  &__title span:nth-child(10){
+    color: gold;
+  }
+  &__title span:nth-child(11){
+    color: lawngreen;
+  }
+}
+
+.button-start{
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+  font-size: 24px;
+  text-transform: uppercase;
+  color: blue;
+  width: $button-start-width;
+  height: $button-start-height;
+  background-color: rgb(240, 217, 10);
+  border-radius: 15px;
+  position: relative;
+  transition: all 0.8s ease 0s;
+  overflow: hidden;
+
+  &:hover{
+    top: -1px;
+    box-shadow: 0 0 15px rgb(217, 240, 10);
+    transition: box-shadow 0.3s ease 0s;
+  }
+  &:active{
+    top: 1px;
+    box-shadow: none;
+    transition: all 0.2s ease 0s;
+  }
+  &__text{
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    text-shadow: 2px 1px #558abb;
+    user-select: none;
+  }
+}
+
+.game-page{
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #333;
+
+  &:target{
+    display: block;
+  }
+
+  &__win{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background-color: #333;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    font-size: 40px;
+    visibility: hidden;
+  }
+  &:hover &__win{
+    animation: win 60s steps(1) forwards;
+  }
+  @keyframes win{
+    0%{}
+    100%{
+      visibility: visible;
+    }
+  }
+}
+
+.game{
+  &__body{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  &__items{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    pointer-events: all;
+  }
+  &__item{
+    height: $game-item-height;
+    flex: 1 0 $game-item-width;
+    position: relative;
+    border-radius: 3px;
+    margin: 0px 2px 0px 2px;
+  }
+  &__item:first-child{
+    margin: 0px 2px 0px 0px;
+  }
+  &__item:last-child{
+    margin: 0px 0px 0px 2px;
+  }
+  &__item--buttom{
+    height: $button-start-item-size;
+    flex: 1 0 $button-start-item-size;
+  }
+  &__item--1{
+    background-color: red;
+    @include game-item-animation(1.3s, linear);
+  }
+  &__item--2{
+    background-color: cyan;
+    @include game-item-animation(1.4s, linear, 0.4s);
+  }
+  &__item--3{
+    background-color: yellow;
+    @include game-item-animation(1.3s, linear);
+  }
+  &__item--4{
+    background-color: lawngreen;
+    @include game-item-animation(1s, linear, 0.1s);
+  }
+  &__item--5{
+    background-color: magenta;
+    @include game-item-animation(1.2s, linear);
+  }
+  &__item--6{
+    background-color: powderblue;
+    @include game-item-animation(1.1s, linear, 0.3s);
+  }
+  &__item--7{
+    background-color: orange;
+    @include game-item-animation(1.3s, linear);
+  }
+  &__item--8{
+    background-color: red;
+    @include game-item-animation(1.1s, linear);
+  }
+  &__item--9{
+    background-color: cyan;
+    @include game-item-animation(0.9s, linear);
+  }
+  &__item--10{
+    background-color: yellow;
+    @include game-item-animation(1.2s, linear, 0.4s);
+  }
+  &__item--11{
+    background-color: magenta;
+    @include game-item-animation(1.5s, linear);
+  }
+  &__item--12{
+    background-color: powderblue;
+    @include game-item-animation(1.2s, linear, 0.2s);
+  }
+  &__item--13{
+    background-color: orange;
+    @include game-item-animation(1.1s, linear);
+  }
+
+  &__counter{
+    position: absolute;
+    bottom: 22px;
+    left: 22px;
+    font-size: 20px;
+    width: 98px;
+    overflow: hidden;
+  }
+  &__counter::after,
+  &__result span::after{
+    display: block;
+    content: "00:0000:0100:0200:0300:0400:0500:0600:0700:0800:0900:1000:1100:1200:1300:1400:1500:1600:1700:1800:1900:2000:2100:2200:2300:2400:2500:2600:2700:2800:2900:3000:3100:3200:3300:3400:3500:3600:3700:3800:3900:4000:4100:4200:4300:4400:4500:4600:4700:4800:4900:5000:5100:5200:5300:5400:5500:5600:5700:5800:5901:00";
+    animation: timer 60s steps(60) forwards;
+  }
+
+  &__result{
+    font-size: 34px;
+    visibility: hidden;
+  }
+  &__result span{
+    font-size: 34px;
+	  width: 168px;
+	  display: inline-block;
+	  vertical-align: middle;
+	  overflow: hidden;
+	  color: blue;
+  }
+  &__result span::after{
+    animation: reverse-timer 60s steps(60) forwards;
+  }
+
+  &__body:hover &__item,
+  &__body:hover &__counter::after,
+  &__body:hover &__result span::after{
+    animation-play-state: paused;
+  }
+  &__body:hover &__result{
+    visibility: visible;
+  }
+  &__body:hover &__items{
+    display: none;
+  }
+  &__body:hover{    
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background-color: #333;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    pointer-events: all;
+  }
+
+  @keyframes timer{
+    0%{
+      text-indent: -300ch;
+    }
+    50%{
+      color: yellow;
+    }
+    100% {
+      color: red;
+      text-indent: 0ch;
+    }
+  }
+  @keyframes reverse-timer{
+    0%{
+      text-indent: 0ch;
+    }
+    100% {
+      text-indent: -300ch;
+    }
+  }
+}
+
+.info{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 50;
+
+  &__icon{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.4s ease 0s;
+  }
+  &__icon:hover{
+    box-shadow: 0 0 10px #fff;
+    transition: all 0.2s ease 0s;
+  }
+  &__body{
+    display: none;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    width: 450px;
+    background-color: #000;
+    font-size: 14px;
+    line-height: 23px;
+    padding: 25px 10px 20px 15px;
+    border-radius: 15px 0 15px 0;
+  }
+  &__body:target{
+    display: block;
+  }
+  &__close{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 18px;
+    color: red;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease 0s;
+  }
+  &__close:hover{
+    text-shadow: 0px 0px 1px red;
+    font-size: 19px;
+    transition: all 0.4s ease 0s;
+  }
+  &__close:active{
+    font-size: 17px;
+    transition: all 0.1s ease 0s;
+  }
+  &__text{
+    padding: 0px 10px 0px 0px;
+  }
+  &__text p{
+    margin: 0px 0px 12px 0px;
+  }
+  &__text p:last-child{
+    margin: 0px;
+  }
+}
